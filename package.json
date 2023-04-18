@@ -4,7 +4,7 @@
   "description": " List components for Vue.js. ",
   "author": "Aventail Ltd. <info@aventail.hu>",
   "homepage": "https://github.com/AventailLtd/list-base-vue",
-  "private": true,
+  "private": false,
   "license": "MIT",
   "repository": {
     "type": "git",
