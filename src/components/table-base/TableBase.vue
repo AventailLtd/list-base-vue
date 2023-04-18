@@ -2,12 +2,13 @@
   <table :class="tableClass">
     <thead>
       <tr>
-        <template v-for="field in fields" :key="field.key">
+        <template v-for="field in fields">
           <th
             :class="{
               'cursor-pointer': isSortableField(field),
               thClass,
             }"
+            :key="field.key"
             @click="onHeadClick(field)"
           >
             <div :class="thInnerClass">
@@ -34,14 +35,14 @@
         </td>
       </tr>
       <tr v-for="(item, key) in items" v-else :key="key">
-        <template v-for="field in fields" :key="field.key">
+        <template v-for="field in fields">
           <td
             :class="{
               tdClass,
             }"
+            :key="field.key"
           >
             <slot
-              :key="key"
               name="td"
               :field="field.key"
               :item="field.key in item ? item[field.key] : null"
