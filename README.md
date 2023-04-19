@@ -1,3 +1,3 @@
-# List Base Vue
+# Vue Table Base
 
 todo README.md
