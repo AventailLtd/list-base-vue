@@ -4,10 +4,10 @@
       <tr>
         <template v-for="field in fields" :key="field.key">
           <th
-            :class="{
-              'cursor-pointer': isSortableField(field),
+            :class="[{
+              'cursor-pointer': isSortableField(field)},
               thClass,
-            }"
+            ]"
             @click="onHeadClick(field)"
           >
             <div :class="thInnerClass">
@@ -36,9 +36,7 @@
       <tr v-for="(item, key) in items" v-else :key="key">
         <template v-for="field in fields" :key="field.key">
           <td
-            :class="{
-              tdClass,
-            }"
+            :class="tdClass"
           >
             <slot
               :key="key"
