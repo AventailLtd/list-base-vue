@@ -16,6 +16,22 @@
           (orderable)
         </small>
       </template>
+      <template #thInner="data">
+        <span v-if="data.field.tooltip !== undefined" :title="data.field.tooltip">
+          {{ data.field.label }} (with tooltip)
+        </span>
+        <span v-else>
+          {{ data.field.label }}
+        </span>
+      </template>
+      <template #td="data">
+        <div v-if="data.field === 'price'">
+          {{ data.item }} + Using another column value: {{ items[data.index].name }}
+        </div>
+        <div v-else>
+          {{ data.item }}
+        </div>
+      </template>
     </table-base>
 
     Order:
@@ -42,6 +58,7 @@ export default defineComponent({
         {
           key: 'name',
           label: 'Name',
+          tooltip: 'Tooltip Test',
         },
         {
           key: 'price',
