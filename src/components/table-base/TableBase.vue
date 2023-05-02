@@ -4,14 +4,16 @@
       <tr>
         <template v-for="field in fields" :key="field.key">
           <th
-            :class="{
-              'cursor-pointer': isSortableField(field),
+            :class="[{
+              'cursor-pointer': isSortableField(field)},
               thClass,
-            }"
+            ]"
             @click="onHeadClick(field)"
           >
             <div :class="thInnerClass">
-              <span>{{ field.label }}</span>
+              <slot name="thInner" :field="field">
+                <span v-text="field.label" />
+              </slot>
               <slot v-if="isActiveOrderBy(field.key) && !sortDesc" name="sortIconAsc" />
               <slot v-else-if="isActiveOrderBy(field.key) && sortDesc" name="sortIconDesc" />
               <slot v-else-if="isSortableField(field)" name="sortIconClassNotActive" />
@@ -41,12 +43,10 @@
       >
         <template v-for="field in fields" :key="field.key">
           <td
-            :class="{
-              tdClass,
-            }"
+            :class="tdClass"
           >
             <slot
-              :key="key"
+              :index="key"
               name="td"
               :field="field.key"
               :item="field.key in item ? item[field.key] : null"
