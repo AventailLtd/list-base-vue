@@ -1,3 +1,10 @@
 # Vue Table Base
 
-todo README.md
+## Dev
+```
+yarn install
+```
+
+```
+yarn dev
+```

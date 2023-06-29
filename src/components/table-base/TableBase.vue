@@ -42,9 +42,7 @@
         :class="item.trClass"
       >
         <template v-for="field in fields" :key="field.key">
-          <td
-            :class="tdClass"
-          >
+          <td :class="getTdClassList(item, field)">
             <slot
               :index="key"
               name="td"
@@ -130,6 +128,26 @@ export default {
     }
   },
   methods: {
+    /**
+     * @param item
+     * @param field
+     * @returns {*[]}
+     */
+    getTdClassList(item, field) {
+      const tdClassList = []
+
+      // Default tdClass from prop
+      if (this.tdClass !== null) {
+        tdClassList.push(this.tdClass)
+      }
+
+      // Item class by item and field
+      if (item.tdClass !== undefined) {
+        tdClassList.push(item.tdClass[field.key])
+      }
+
+      return tdClassList
+    },
     /**
      * Is order by active by field?
      *
