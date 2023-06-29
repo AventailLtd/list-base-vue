@@ -71,11 +71,15 @@ export default defineComponent({
           id: 1,
           name: 'Test1',
           price: 150,
+          trClass: 'bg-danger',
         },
         {
           id: 2,
           name: 'Test2',
           price: 250,
+          tdClass: {
+            price: 'bg-success',
+          }
         },
       ],
       orderBy: 'name',
@@ -90,3 +94,12 @@ export default defineComponent({
   }
 })
 </script>
+
+<style>
+.bg-danger {
+  background-color: #da6c6c;
+}
+.bg-success {
+  background-color: #2ba41e;
+}
+</style>
