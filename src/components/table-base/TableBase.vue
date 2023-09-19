@@ -43,7 +43,7 @@
       >
         <template v-for="field in fields" :key="field.key">
           <td :class="getTdClassList(item, field)">
-            <!-- "item" prop deprecated, its name is too general, value should be used instead -->
+            <!-- "item" prop deprecated, its name is too general, "value" should be used instead -->
             <slot
               :index="key"
               name="td"
