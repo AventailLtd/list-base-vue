@@ -43,11 +43,14 @@
       >
         <template v-for="field in fields" :key="field.key">
           <td :class="getTdClassList(item, field)">
+            <!-- "item" prop deprecated, its name is too general, value should be used instead -->
             <slot
               :index="key"
               name="td"
               :field="field.key"
+              :row="item"
               :item="field.key in item ? item[field.key] : null"
+              :value="field.key in item ? item[field.key] : null"
             >
               {{ item[field.key] }}
             </slot>
