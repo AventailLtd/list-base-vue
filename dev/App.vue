@@ -26,10 +26,10 @@
       </template>
       <template #td="data">
         <div v-if="data.field === 'price'">
-          {{ data.item }} + Using another column value: {{ items[data.index].name }}
+          {{ data.value }} + Using another column value: {{ data.row.name }}
         </div>
         <div v-else>
-          {{ data.item }}
+          {{ data.value }}
         </div>
       </template>
     </table-base>
