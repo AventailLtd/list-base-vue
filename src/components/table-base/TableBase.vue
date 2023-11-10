@@ -222,4 +222,8 @@ export default {
 .cursor-pointer {
   cursor: pointer;
 }
+
+.text-primary {
+  color: #007bff;
+}
 </style>
