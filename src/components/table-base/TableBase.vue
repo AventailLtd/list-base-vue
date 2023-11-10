@@ -10,7 +10,12 @@
             ]"
             @click="onHeadClick(field)"
           >
-            <div :class="thInnerClass">
+            <div
+              :class="[{
+                'text-primary': isActiveOrderBy(field.key)},
+                thInnerClass,
+              ]"
+            >
               <slot name="thInner" :field="field">
                 <span v-text="field.label" />
               </slot>
