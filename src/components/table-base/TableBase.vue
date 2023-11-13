@@ -10,12 +10,7 @@
             ]"
             @click="onHeadClick(field)"
           >
-            <div
-              :class="[{
-                'text-primary': isActiveOrderBy(field.key)},
-                thInnerClass,
-              ]"
-            >
+            <div :class="thInnerClass" :style="getStyleForActiveOrderBy(field.key)">
               <slot name="thInner" :field="field">
                 <span v-text="field.label" />
               </slot>
@@ -126,6 +121,13 @@ export default {
       type: String,
       default: null,
     },
+    /**
+     * color to highlight active sorting
+     */
+    activeOrderByColor: {
+      type: String,
+      default: null,
+    }
   },
   data() {
     return {
@@ -214,6 +216,19 @@ export default {
       this.setSortDesc(field.key)
       this.$emit('orderChanged', { sortDesc: this.sortDesc, orderBy: field.key })
     },
+    /**
+     * Get style for active sorting order by
+     *
+     * @param field
+     * @returns {{color: string}}
+     */
+    getStyleForActiveOrderBy(field) {
+      if (this.activeOrderByColor !== null && this.isActiveOrderBy(field)) {
+        return {
+          color: this.activeOrderByColor,
+        }
+      }
+    },
   },
 }
 </script>
@@ -221,9 +236,5 @@ export default {
 <style scoped>
 .cursor-pointer {
   cursor: pointer;
-}
-
-.text-primary {
-  color: #007bff;
 }
 </style>
