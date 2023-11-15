@@ -10,7 +10,7 @@
             ]"
             @click="onHeadClick(field)"
           >
-            <div :class="thInnerClass">
+            <div :class="[getClassForActiveOrderBy(field.key), thInnerClass,]">
               <slot name="thInner" :field="field">
                 <span v-text="field.label" />
               </slot>
@@ -121,6 +121,13 @@ export default {
       type: String,
       default: null,
     },
+    /**
+     * class to highlight active sorting
+     */
+    activeOrderByClass: {
+      type: String,
+      default: null,
+    }
   },
   data() {
     return {
@@ -208,6 +215,19 @@ export default {
       }
       this.setSortDesc(field.key)
       this.$emit('orderChanged', { sortDesc: this.sortDesc, orderBy: field.key })
+    },
+    /**
+     * Get class for active sorting order by
+     *
+     * @param field
+     * @returns {null|string}
+     */
+    getClassForActiveOrderBy(field) {
+      if (this.isActiveOrderBy(field)) {
+        return this.activeOrderByClass
+      }
+
+      return null
     },
   },
 }
