@@ -46,6 +46,7 @@
           <td
             :class="getTdClassList(item, field)"
             :key="field.key"
+            @click="onRowClicked(item)"
           >
             <!-- "item" prop deprecated, its name is too general, value should be used instead -->
             <slot
@@ -210,6 +211,12 @@ export default {
       this.setSortDesc(field.key)
       this.$emit('orderChanged', { sortDesc: this.sortDesc, orderBy: field.key })
     },
+    /**
+     * Table row clicked
+     */
+    onRowClicked(item) {
+      this.$emit('rowClicked', item)
+    }
   },
 }
 </script>
