@@ -41,12 +41,12 @@
         v-else
         :key="key"
         :class="item.trClass"
+        @click="onRowClicked(item)"
       >
         <template v-for="field in fields">
           <td
             :class="getTdClassList(item, field)"
             :key="field.key"
-            @click="onRowClicked(item)"
           >
             <!-- "item" prop deprecated, its name is too general, value should be used instead -->
             <slot
