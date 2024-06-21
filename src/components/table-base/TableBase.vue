@@ -40,6 +40,7 @@
         v-else
         :key="key"
         :class="item.trClass"
+        @click="onRowClicked(item)"
       >
         <template v-for="field in fields" :key="field.key">
           <td :class="getTdClassList(item, field)">
@@ -215,6 +216,12 @@ export default {
       }
       this.setSortDesc(field.key)
       this.$emit('orderChanged', { sortDesc: this.sortDesc, orderBy: field.key })
+    },
+    /**
+     * Table row clicked
+     */
+    onRowClicked(item) {
+      this.$emit('rowClicked', item)
     },
     /**
      * Get class for active sorting order by

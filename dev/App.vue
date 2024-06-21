@@ -1,6 +1,6 @@
 <template>
   <div>
-    <table-base :items="items" :fields="fields" :order-by="orderBy" @orderChanged="orderChanged" >
+    <table-base :items="items" :fields="fields" :order-by="orderBy" @orderChanged="orderChanged" @rowClicked="onRowClicked">
       <template #sortIconAsc>
         <small>
           (active asc)
@@ -32,10 +32,14 @@
           {{ data.value}}
         </div>
       </template>
-  </table-base>
-
-    Order:
-    {{ orderBy }} {{ !sortDesc ? 'ASC' : 'DESC' }}
+    </table-base>
+    <div>
+      Order:
+      {{ orderBy }} {{ !sortDesc ? 'ASC' : 'DESC' }}
+    </div>
+    <div>
+      ClickedRow: {{ clickedRow }}
+    </div>
   </div>
 </template>
 
@@ -84,6 +88,7 @@ export default defineComponent({
       ],
       orderBy: 'name',
       sortDesc: false,
+      clickedRow: null,
     }
   },
   methods: {
@@ -91,6 +96,10 @@ export default defineComponent({
       this.sortDesc = sortDesc
       this.orderBy = orderBy
     },
+
+    onRowClicked(item) {
+      this.clickedRow = item
+    }
   }
 })
 </script>
