@@ -35,29 +35,33 @@
           </slot>
         </td>
       </tr>
-      <tr
-        v-for="(item, key) in items"
-        v-else
-        :key="key"
-        :class="item.trClass"
-        @click="onRowClicked(item)"
-      >
-        <template v-for="field in fields" :key="field.key">
-          <td :class="getTdClassList(item, field)">
-            <!-- "item" prop deprecated, its name is too general, "value" should be used instead -->
-            <slot
-              :index="key"
-              name="td"
-              :field="field.key"
-              :row="item"
-              :item="field.key in item ? item[field.key] : null"
-              :value="field.key in item ? item[field.key] : null"
-            >
-              {{ item[field.key] }}
-            </slot>
+      <template v-for="(item, key) in items" :key="key" v-else>
+        <tr
+            :class="item.trClass"
+            @click="onRowClicked(item)"
+        >
+          <template v-for="field in fields" :key="field.key">
+            <td :class="getTdClassList(item, field)">
+              <!-- "item" prop deprecated, its name is too general, "value" should be used instead -->
+              <slot
+                  :index="key"
+                  name="td"
+                  :field="field.key"
+                  :row="item"
+                  :item="field.key in item ? item[field.key] : null"
+                  :value="field.key in item ? item[field.key] : null"
+              >
+                {{ item[field.key] }}
+              </slot>
+            </td>
+          </template>
+        </tr>
+        <tr v-if="item._showRowDetails">
+          <td :colspan="fields.length">
+            <slot name="row-details" :row="item" />
           </td>
-        </template>
-      </tr>
+        </tr>
+      </template>
     </tbody>
   </table>
 </template>
@@ -128,7 +132,7 @@ export default {
     activeOrderByClass: {
       type: String,
       default: null,
-    }
+    },
   },
   data() {
     return {

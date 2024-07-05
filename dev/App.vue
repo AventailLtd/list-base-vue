@@ -1,6 +1,6 @@
 <template>
   <div>
-    <table-base :items="items" :fields="fields" :order-by="orderBy" @orderChanged="orderChanged" @rowClicked="onRowClicked">
+    <table-base :items="getItems()" :fields="fields" :order-by="orderBy" @orderChanged="orderChanged" @rowClicked="onRowClicked">
       <template #sortIconAsc>
         <small>
           (active asc)
@@ -30,6 +30,12 @@
         </div>
         <div v-else>
           {{ data.value}}
+        </div>
+      </template>
+      <template #row-details>
+        <div class="row-details">
+          Row details
+          <textarea class="w-100"/>
         </div>
       </template>
     </table-base>
@@ -99,7 +105,15 @@ export default defineComponent({
 
     onRowClicked(item) {
       this.clickedRow = item
-    }
+    },
+
+    getItems() {
+      // add row details extra row after the first row
+      return this.items.map(item => {
+        item._showRowDetails = item.id === 1;
+        return item
+      })
+    },
   }
 })
 </script>
@@ -111,5 +125,8 @@ export default defineComponent({
 }
 .bg-success {
   background-color: #2ba41e;
+}
+.w-100 {
+  width: 100%;
 }
 </style>
