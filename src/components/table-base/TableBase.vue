@@ -4,11 +4,11 @@
       <tr>
         <template v-for="field in fields">
           <th
+            :key="field.key"
             :class="[{
               'cursor-pointer': isSortableField(field)},
               thClass,
             ]"
-            :key="field.key"
             @click="onHeadClick(field)"
           >
             <div :class="thInnerClass">
@@ -36,32 +36,37 @@
           </slot>
         </td>
       </tr>
-      <tr
-        v-for="(item, key) in items"
-        v-else
-        :key="key"
-        :class="item.trClass"
-        @click="onRowClicked(item)"
-      >
-        <template v-for="field in fields">
-          <td
-            :class="getTdClassList(item, field)"
-            :key="field.key"
-          >
-            <!-- "item" prop deprecated, its name is too general, value should be used instead -->
-            <slot
-              :index="key"
-              name="td"
-              :field="field.key"
-              :row="item"
-              :item="field.key in item ? item[field.key] : null"
-              :value="field.key in item ? item[field.key] : null"
+      <template v-for="(item, key) in items" v-else>
+        <tr
+          :key="key"
+          :class="item.trClass"
+          @click="onRowClicked(item)"
+        >
+          <template v-for="field in fields">
+            <td
+                :key="field.key"
+                :class="getTdClassList(item, field)"
             >
-              {{ item[field.key] }}
-            </slot>
+              <!-- "item" prop deprecated, its name is too general, value should be used instead -->
+              <slot
+                  :index="key"
+                  name="td"
+                  :field="field.key"
+                  :row="item"
+                  :item="field.key in item ? item[field.key] : null"
+                  :value="field.key in item ? item[field.key] : null"
+              >
+                {{ item[field.key] }}
+              </slot>
+            </td>
+          </template>
+        </tr>
+        <tr class="row-details">
+          <td :colspan="fields.length">
+            <slot name="row-details" :row="item" />
           </td>
-        </template>
-      </tr>
+        </tr>
+      </template>
     </tbody>
   </table>
 </template>
