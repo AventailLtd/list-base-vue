@@ -4,11 +4,11 @@
       <tr>
         <template v-for="field in fields" :key="field.key">
           <th
-              :class="[{
-                'cursor-pointer': isSortableField(field)},
-                thClass,
-              ]"
-              @click="onHeadClick(field)"
+            :class="[{
+              'cursor-pointer': isSortableField(field)},
+              thClass,
+            ]"
+            @click="onHeadClick(field)"
           >
             <div :class="[getClassForActiveOrderBy(field.key), thInnerClass,]">
               <slot name="thInner" :field="field">
@@ -23,45 +23,45 @@
       </tr>
     </thead>
     <tbody>
-    <tr v-if="isLoading">
-      <td :colspan="fields.length">
-        <slot name="loading" />
-      </td>
-    </tr>
-    <tr v-else-if="items.length === 0">
-      <td :colspan="fields.length">
-        <slot name="empty">
-          <div v-text="'Not found'"/>
-        </slot>
-      </td>
-    </tr>
-    <template v-for="(item, key) in items" :key="key" v-else>
-      <tr
-          :class="item.trClass"
-          @click="onRowClicked(item)"
-      >
-        <template v-for="field in fields" :key="field.key">
-          <td :class="getTdClassList(item, field)">
-            <!-- "item" prop deprecated, its name is too general, "value" should be used instead -->
-            <slot
-                :index="key"
-                name="td"
-                :field="field.key"
-                :row="item"
-                :item="field.key in item ? item[field.key] : null"
-                :value="field.key in item ? item[field.key] : null"
-            >
-              {{ item[field.key] }}
-            </slot>
-          </td>
-        </template>
-      </tr>
-      <tr class="row-details">
+      <tr v-if="isLoading">
         <td :colspan="fields.length">
-          <slot name="row-details" :row="item" />
+          <slot name="loading" />
         </td>
       </tr>
-    </template>
+      <tr v-else-if="items.length === 0">
+        <td :colspan="fields.length">
+          <slot name="empty">
+            <div v-text="'Not found'"/>
+          </slot>
+        </td>
+      </tr>
+      <template v-for="(item, key) in items" :key="key" v-else>
+        <tr
+            :class="item.trClass"
+            @click="onRowClicked(item)"
+        >
+          <template v-for="field in fields" :key="field.key">
+            <td :class="getTdClassList(item, field)">
+              <!-- "item" prop deprecated, its name is too general, "value" should be used instead -->
+              <slot
+                  :index="key"
+                  name="td"
+                  :field="field.key"
+                  :row="item"
+                  :item="field.key in item ? item[field.key] : null"
+                  :value="field.key in item ? item[field.key] : null"
+              >
+                {{ item[field.key] }}
+              </slot>
+            </td>
+          </template>
+        </tr>
+        <tr class="row-details">
+          <td :colspan="fields.length">
+            <slot name="row-details" :row="item" />
+          </td>
+        </tr>
+      </template>
     </tbody>
   </table>
 </template>
