@@ -32,6 +32,12 @@
           {{ data.value}}
         </div>
       </template>
+      <template #row-details="data">
+        <div v-if="data.row.id === 1" class="row-details">
+          Row details
+          <textarea class="w-100"/>
+        </div>
+      </template>
     </table-base>
     <div>
       Order:
@@ -111,5 +117,8 @@ export default defineComponent({
 }
 .bg-success {
   background-color: #2ba41e;
+}
+.w-100 {
+  width: 100%;
 }
 </style>
