@@ -1,26 +1,26 @@
 <template>
   <table :class="tableClass">
     <thead>
-    <tr>
-      <template v-for="field in fields" :key="field.key">
-        <th
-            :class="[{
-              'cursor-pointer': isSortableField(field)},
-              thClass,
-            ]"
-            @click="onHeadClick(field)"
-        >
-          <div :class="[getClassForActiveOrderBy(field.key), thInnerClass,]">
-            <slot name="thInner" :field="field">
-              <span v-text="field.label" />
-            </slot>
-            <slot v-if="isActiveOrderBy(field.key) && !sortDesc" name="sortIconAsc" />
-            <slot v-else-if="isActiveOrderBy(field.key) && sortDesc" name="sortIconDesc" />
-            <slot v-else-if="isSortableField(field)" name="sortIconClassNotActive" />
-          </div>
-        </th>
-      </template>
-    </tr>
+      <tr>
+        <template v-for="field in fields" :key="field.key">
+          <th
+              :class="[{
+                'cursor-pointer': isSortableField(field)},
+                thClass,
+              ]"
+              @click="onHeadClick(field)"
+          >
+            <div :class="[getClassForActiveOrderBy(field.key), thInnerClass,]">
+              <slot name="thInner" :field="field">
+                <span v-text="field.label" />
+              </slot>
+              <slot v-if="isActiveOrderBy(field.key) && !sortDesc" name="sortIconAsc" />
+              <slot v-else-if="isActiveOrderBy(field.key) && sortDesc" name="sortIconDesc" />
+              <slot v-else-if="isSortableField(field)" name="sortIconClassNotActive" />
+            </div>
+          </th>
+        </template>
+      </tr>
     </thead>
     <tbody>
     <tr v-if="isLoading">
