@@ -80,7 +80,7 @@ export default defineComponent({
           name: 'Test1',
           price: 150,
           trClass: 'bg-danger',
-          _showRowDetails: true,
+          showRowDetails: true,
         },
         {
           id: 2,

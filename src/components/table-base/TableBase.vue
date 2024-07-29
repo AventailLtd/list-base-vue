@@ -61,7 +61,7 @@
             </td>
           </template>
         </tr>
-        <tr v-if="item._showRowDetails">
+        <tr v-if="item.showRowDetails">
           <td :colspan="fields.length">
             <slot name="row-details" :row="item" />
           </td>
