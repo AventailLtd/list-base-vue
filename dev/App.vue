@@ -33,10 +33,8 @@
         </div>
       </template>
       <template #row-details="data">
-        <div v-if="data.row.id === 1" class="row-details">
-          Row details
-          <textarea class="w-100"/>
-        </div>
+        Row details
+        <textarea class="w-100"/>
       </template>
     </table-base>
     <div>
@@ -82,6 +80,7 @@ export default defineComponent({
           name: 'Test1',
           price: 150,
           trClass: 'bg-danger',
+          _showRowDetails: true,
         },
         {
           id: 2,
